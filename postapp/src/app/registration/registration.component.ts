@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { NgForm } from '@angular/forms';
+import { FirebaseDatabaseService } from '../services/firebase-database.service';
 
 @Component({
   selector: 'app-registration',
@@ -13,7 +14,7 @@ export class RegistrationComponent implements OnInit {
     userName : '',
     password : ''
   }
-  constructor() { }
+  constructor(private firebaseService : FirebaseDatabaseService) { }
 
   ngOnInit() {
   }
@@ -23,6 +24,9 @@ export class RegistrationComponent implements OnInit {
     this.userDetails.userName = form.value.userName;
     this.userDetails.password = form.value.password;
     console.log(this.userDetails);    
+    this.firebaseService.postUserDetails(this.userDetails).subscribe((res)=>{
+      console.log(res);  
+    })
   }
 
 }

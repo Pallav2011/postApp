@@ -8,6 +8,7 @@ import { LoginComponent } from './login/login.component';
 import { FormsModule } from '@angular/forms';
 import { MatButtonModule, MatCardModule, MatIconModule, MatInputModule } from '@angular/material';
 import { RegistrationComponent } from './registration/registration.component';
+import { HttpClientModule } from '@angular/common/http';
 
 @NgModule({
   declarations: [
@@ -24,7 +25,7 @@ import { RegistrationComponent } from './registration/registration.component';
     MatInputModule,
     MatIconModule,
     MatButtonModule,
-    
+    HttpClientModule
   ],
   providers: [],
   bootstrap: [AppComponent]
