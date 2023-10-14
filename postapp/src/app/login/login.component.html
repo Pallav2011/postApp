@@ -1,0 +1,38 @@
+
+
+<mat-card class="login-page">
+  <mat-card-title style="text-align: center;color:darkgreen;"> Login </mat-card-title>
+  <mat-card-content>
+    <form class="login-form" #loginForm="ngForm">
+      
+        <mat-form-field>
+        <input matInput type="email" name="email" ngModel #email="ngModel" required email placeholder=" Enter Email"/>
+        <mat-error *ngIf="email.errors?.required">The email is mandatory</mat-error> 
+        </mat-form-field>
+      
+      <mat-form-field>
+        <input matInput ngModel required #password="ngModel" name="password" [type]="hide ? 'password' : 'text'" placeholder="Password" minlength="8" maxlength="20"/>
+        <button mat-icon-button matSuffix (click)="hide = !hide" [attr.aria-label]="'Hide password'" [attr.aria-pressed]="hide">
+          <mat-icon>{{hide ? 'visibility_off' : 'visibility'}}</mat-icon>
+        </button>
+        <mat-error *ngIf="password.errors?.required">The password is mandatory</mat-error>
+        <mat-error *ngIf="password.errors?.minlength">
+          your password must have minimum
+          {{ password.errors?.minlength.requiredLength }} chars, but it only has
+          {{ password.errors?.minlength.actualLength }}
+        </mat-error>
+      </mat-form-field> <br>
+
+      <button mat-raised-button color="primary" [disabled]="!loginForm.valid" (click)="login(loginForm)">Login</button>
+      <br>
+      <span style="font-weight:bold; text-align: center;">
+        OR <br> 
+        <a routerLinkActive="active" routerLink="/registration">Create Account</a>
+      </span>
+      
+    </form>
+
+    <div class="form-val"></div>
+  </mat-card-content>
+</mat-card>
+
