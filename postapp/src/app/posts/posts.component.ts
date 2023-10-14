@@ -13,6 +13,9 @@ export class PostsComponent implements OnInit {
   file:any;
   showPost:boolean = false;
   captionData = '';
+  likeUrl = './assets/not_like.png';
+  countLikes:number = 0;
+  uploadButton:boolean = true;
   constructor(private subjectServ : SubjectService) { }
 
   ngOnInit() {
@@ -29,6 +32,7 @@ export class PostsComponent implements OnInit {
       this.file = event.target.result;
       }
     }
+    this.uploadButton = false;
   }
 
   uploadFile(cap){
@@ -37,6 +41,17 @@ export class PostsComponent implements OnInit {
     this.url = this.file;
     this.captionData = cap.value;
     this.showPost = true;
+  }
+
+  buttonClicked(){
+    if (this.likeUrl == './assets/not_like.png') {
+      this.likeUrl = './assets/like_red.png';
+      this.countLikes++;
+    }
+    else{
+      this.likeUrl = './assets/not_like.png';
+      this.countLikes--;
+    }
   }
 
 }

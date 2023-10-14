@@ -8,6 +8,13 @@
 
 .cardDesign {
     width: 420px;
-    height: 450px;
+    /* height: 500px; */
     background-color:aqua;
+    border: solid 1px black;
+}
+
+.likeButton {
+    background-color: transparent;
+    border: none;
+    text-align: left;
 }

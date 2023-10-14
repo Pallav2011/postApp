@@ -4,19 +4,27 @@
   <textarea name="caption" id="" #caption class="captionDesign" cols="50" rows="4" placeholder="Say Something..."></textarea>
  
   <div class="mb-3 d-flex align-items-center justify-content-center" >
-    <button type="button" class="btn btn-primary" (click)="uploadFile(caption)">Upload</button>
+    <button [disabled]="uploadButton" type="button" class="btn btn-primary" (click)="uploadFile(caption)">Upload</button>
     <input class="form-control" type="file" id="formFile" (change)="getFile($event)">
   </div>
 
   <div *ngIf="showPost" class="mb-3 d-flex align-items-center justify-content-center">
 
     <div class="card cardDesign">
-      <span class="card-title" style="text-align: left;">{{userName}}</span>
-      <img class="card-img-top" [src]="url" alt="Card image cap">
+      <h6 class="card-title" style="text-align: left;margin-left: 10px;">{{userName}}</h6>
+      <img class="card-img-top" [src]="url" alt="Card image cap" height="400px" width="410px">
       <div class="card-body">
-        <h5 class="card-title" style="text-align: left;">{{captionData}}</h5>
-        
+        <h5 class="card-title" style="text-align: left;">{{captionData}}</h5>       
       </div>
+        <button (click)="buttonClicked()" class="likeButton">
+        <img src="{{likeUrl}}" alt="" height="25px" width="25px">
+        {{countLikes}} liked it
+        </button>
+        <mat-form-field>
+          <input matInput type="text" name="comment" #comment placeholder="Add a comment" style="width: 300px;"/>
+          <button mat-button>Comment</button>
+          </mat-form-field>
+       
     </div>
 
   </div>
