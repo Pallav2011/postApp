@@ -22,11 +22,13 @@ export class RegistrationComponent implements OnInit {
   saveData(form : NgForm){
     this.userDetails.email = form.value.email;
     this.userDetails.userName = form.value.userName;
-    this.userDetails.password = form.value.password;
-    console.log(this.userDetails);    
+    this.userDetails.password = form.value.password; 
     this.firebaseService.postUserDetails(this.userDetails).subscribe((res)=>{
-      console.log(res);  
+      console.log(res);
+      alert('Account Created Successfully !!!');
+      form.resetForm();
     })
+    
   }
 
 }

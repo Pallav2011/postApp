@@ -1,6 +1,8 @@
 import { Component, OnInit } from '@angular/core';
 import { NgForm } from '@angular/forms';
 import { FirebaseDatabaseService } from '../services/firebase-database.service';
+import { Router } from '@angular/router';
+import { SubjectService } from '../services/subject.service';
 
 @Component({
   selector: 'app-login',
@@ -9,11 +11,8 @@ import { FirebaseDatabaseService } from '../services/firebase-database.service';
 })
 export class LoginComponent implements OnInit {
 
-  userDetails = {
-    userId:'',
-    password:''
-  } 
-  constructor(private firebaseservice : FirebaseDatabaseService) { }
+  errorMessage:boolean = false;
+  constructor(private firebaseservice : FirebaseDatabaseService, private route : Router, private subjectServ : SubjectService) { }
 
   ngOnInit() {
   }
@@ -21,15 +20,28 @@ export class LoginComponent implements OnInit {
   getData = [];
 
   login(form : NgForm) {
-    this.userDetails.userId = form.value.email;
-    this.userDetails.password = form.value.password;
-    console.log(this.userDetails);
-    
+    console.log(form);
     this.firebaseservice.getDetails().subscribe((res)=>{
       this.getData.push(res);
       console.log(this.getData);
-      
+
+      this.getData.forEach(currentVal => {
+        console.log(currentVal);
+        
+        if(currentVal.email == form.value.email && currentVal.password == form.value.password){
+          this.errorMessage = false;
+          console.log('you are eligible to go posts');   
+          this.subjectServ.userName.next(currentVal.userName);
+          this.route.navigate(['posts']);
+        }
+        else{
+          console.log('not eligible');
+          this.errorMessage = true;
+          form.resetForm();
+        }
+      })
     })
+ 
   }
 
 }

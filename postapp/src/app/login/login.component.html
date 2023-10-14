@@ -18,6 +18,7 @@
         <mat-error *ngIf="password.errors?.required">The password is mandatory</mat-error>
       </mat-form-field> <br>
 
+      <mat-error *ngIf="errorMessage">Wrong email and password</mat-error>
       <button mat-raised-button color="primary" [disabled]="!loginForm.valid" (click)="login(loginForm)">Login</button>
       <br>
       <span style="font-weight:bold; text-align: center;">

@@ -34,6 +34,11 @@
           </mat-form-field>
 
           <button mat-raised-button  [disabled]="!registerForm.valid" color="primary" (click)="saveData(registerForm)">Create Account</button>
+          <br>
+          <span style="font-weight:bold; text-align: center;">
+            OR <br> 
+            <a routerLinkActive="active" routerLink="/login">Login</a>
+          </span>
 
       </form>
     </mat-card-content>
