@@ -11,16 +11,11 @@
         </mat-form-field>
       
       <mat-form-field>
-        <input matInput ngModel required #password="ngModel" name="password" [type]="hide ? 'password' : 'text'" placeholder="Password" minlength="8" maxlength="20"/>
+        <input matInput ngModel required #password="ngModel" name="password" [type]="hide ? 'password' : 'text'" placeholder="Password"/>
         <button mat-icon-button matSuffix (click)="hide = !hide" [attr.aria-label]="'Hide password'" [attr.aria-pressed]="hide">
           <mat-icon>{{hide ? 'visibility_off' : 'visibility'}}</mat-icon>
         </button>
         <mat-error *ngIf="password.errors?.required">The password is mandatory</mat-error>
-        <mat-error *ngIf="password.errors?.minlength">
-          your password must have minimum
-          {{ password.errors?.minlength.requiredLength }} chars, but it only has
-          {{ password.errors?.minlength.actualLength }}
-        </mat-error>
       </mat-form-field> <br>
 
       <button mat-raised-button color="primary" [disabled]="!loginForm.valid" (click)="login(loginForm)">Login</button>

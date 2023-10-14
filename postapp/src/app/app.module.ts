@@ -23,7 +23,8 @@ import { RegistrationComponent } from './registration/registration.component';
     MatCardModule,
     MatInputModule,
     MatIconModule,
-    MatButtonModule
+    MatButtonModule,
+    
   ],
   providers: [],
   bootstrap: [AppComponent]

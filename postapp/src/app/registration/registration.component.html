@@ -1,1 +1,41 @@
-<p>registration works!</p>
+
+<div style="text-align: center;" class="justify--content-center">
+<mat-card class="register-page">
+    <mat-card-title> Create Account</mat-card-title>
+    <mat-card-content>
+      <form class="register-form" #registerForm="ngForm">
+
+        <mat-form-field appearance="outline">
+            <mat-label>Enter Email</mat-label>
+            <input matInput placeholder="Email" type="email" email ngModel #email="ngModel" name="email" required>
+            <mat-error *ngIf="email.errors?.required">Email is mandatory</mat-error>
+            <mat-error *ngIf="email.errors?.email">Enter Valid Email</mat-error>
+          </mat-form-field>
+
+          <mat-form-field appearance="outline">
+            <mat-label>Enter User Name</mat-label>
+            <input matInput placeholder="User Name" ngModel #userName="ngModel" name="userName" required>
+            <mat-error *ngIf="userName.errors?.required">This first name is mandatory</mat-error>
+        </mat-form-field>   
+
+        <mat-form-field appearance="outline">
+            <mat-label>Enter Password</mat-label>
+            <input matInput ngModel required #password="ngModel" name="password" [type]="hide ? 'password' : 'text'"
+              placeholder="Password" minlength="8" maxlength="20" />
+            <button mat-icon-button matSuffix (click)="hide = !hide" [attr.aria-label]="'Hide password'" [attr.aria-pressed]="hide">
+              <mat-icon>{{hide ? 'visibility_off' : 'visibility'}}</mat-icon>
+            </button>
+            <mat-error *ngIf="password.errors?.required">The password is mandatory</mat-error>
+            <mat-error *ngIf="password.errors?.minlength">
+               password must have minimum
+              {{ password.errors?.minlength.requiredLength }} chars, but it only has
+              {{ password.errors?.minlength.actualLength }}
+            </mat-error>
+          </mat-form-field>
+
+          <button mat-raised-button  [disabled]="!registerForm.valid" color="primary" (click)="saveData(registerForm)">Create Account</button>
+
+      </form>
+    </mat-card-content>
+  </mat-card>
+</div>
