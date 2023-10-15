@@ -10,13 +10,15 @@ import { MatButtonModule, MatCardModule, MatIconModule, MatInputModule } from '@
 import { RegistrationComponent } from './registration/registration.component';
 import { HttpClientModule } from '@angular/common/http';
 import { PostsComponent } from './posts/posts.component';
+import { WildcardComponent } from './wildcard/wildcard.component';
 
 @NgModule({
   declarations: [
     AppComponent,
     LoginComponent,
     RegistrationComponent,
-    PostsComponent
+    PostsComponent,
+    WildcardComponent
   ],
   imports: [
     BrowserModule,
