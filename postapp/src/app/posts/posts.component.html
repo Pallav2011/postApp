@@ -1,6 +1,8 @@
 
 <div class="justify-content-center" style="text-align: center;">
-<br>
+  <br>
+  <h3>Welcome {{userName}}</h3>
+
   <textarea name="caption" id="" #caption class="captionDesign" cols="50" rows="4" placeholder="Say Something..."></textarea>
  
   <div class="mb-3 d-flex align-items-center justify-content-center" >
@@ -8,13 +10,14 @@
     <input class="form-control" type="file" id="formFile" (change)="getFile($event)">
   </div>
 
-  <div *ngIf="showPost" class="mb-3 d-flex align-items-center justify-content-center">
-
+  <div class="mb-3 d-flex align-items-center justify-content-center">
+    <div *ngFor="let u of allPosts">
+      
     <div class="card cardDesign">
-      <h6 class="card-title" style="text-align: left;margin-left: 10px;">{{userName}}</h6>
-      <img class="card-img-top" [src]="url" alt="Card image cap" height="400px" width="410px">
+      <h6 class="card-title" style="text-align: left;margin-left: 10px;">{{u.postUser}}</h6>
+      <img class="card-img-top" src={{u.postImageUrl}} alt="Card image cap" height="400px" width="410px">
       <div class="card-body">
-        <h5 class="card-title" style="text-align: left;">{{captionData}}</h5>       
+        <h5 class="card-title" style="text-align: left;">{{u.caption}}</h5>       
       </div>
         <button (click)="buttonClicked()" class="likeButton">
         <img src="{{likeUrl}}" alt="" height="25px" width="25px">
@@ -23,11 +26,15 @@
         <mat-form-field>
           <input matInput type="text" name="comment" #comment placeholder="Add a comment" style="width: 300px;"/>
           <button mat-button>Comment</button>
-          </mat-form-field>
-       
+        </mat-form-field>  
     </div>
 
+    </div>
   </div>
+
 </div>
+
+
+
 
  

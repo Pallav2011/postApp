@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { SubjectService } from '../services/subject.service';
+import { PostserviceService } from '../services/postservice.service';
 
 @Component({
   selector: 'app-posts',
@@ -16,11 +17,22 @@ export class PostsComponent implements OnInit {
   likeUrl = './assets/not_like.png';
   countLikes:number = 0;
   uploadButton:boolean = true;
-  constructor(private subjectServ : SubjectService) { }
+  allPosts = []
+  constructor(private subjectServ : SubjectService, private postService:PostserviceService) { }
 
   ngOnInit() {
     this.subjectServ.userName.subscribe(res=>{
       this.userName = res;
+    })
+    this.getPostsData();
+    
+  }
+
+  getPostsData (){
+    this.postService.getUserData().subscribe((res)=>{
+      console.log(res);
+      this.allPosts.push(res);
+      console.log(this.allPosts); 
     })
   }
 
@@ -35,9 +47,21 @@ export class PostsComponent implements OnInit {
     this.uploadButton = false;
   }
 
+   postDetails = {
+    postUser : '',
+    caption : '',
+    postImageUrl : ''
+  }
+
   uploadFile(cap){
-    console.log(cap.value);
-    
+   this.postDetails.postUser = this.userName;
+   this.postDetails.caption = cap.value;
+   this.postDetails.postImageUrl = this.file;
+    this.postService.postUserData(this.postDetails).subscribe((res)=>{
+      console.log(res);     
+    })
+    this.getPostsData();
+    console.log(cap.value);   
     this.url = this.file;
     this.captionData = cap.value;
     this.showPost = true;
