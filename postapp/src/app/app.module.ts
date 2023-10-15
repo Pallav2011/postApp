@@ -11,6 +11,7 @@ import { RegistrationComponent } from './registration/registration.component';
 import { HttpClientModule } from '@angular/common/http';
 import { PostsComponent } from './posts/posts.component';
 import { WildcardComponent } from './wildcard/wildcard.component';
+import { AuthgaurdGuard } from './services/authgaurd.guard';
 
 @NgModule({
   declarations: [
@@ -31,7 +32,7 @@ import { WildcardComponent } from './wildcard/wildcard.component';
     MatButtonModule,
     HttpClientModule
   ],
-  providers: [],
+  providers: [AuthgaurdGuard],
   bootstrap: [AppComponent]
 })
 export class AppModule { }

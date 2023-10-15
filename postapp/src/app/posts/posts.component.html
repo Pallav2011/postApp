@@ -23,6 +23,7 @@
         <img src="{{likeUrl}}" alt="" height="25px" width="25px">
         {{countLikes}} liked it
         </button>
+        
         <p *ngIf="displayComment" style="text-align: left;margin-left: 10px;">{{userName}} : {{commentMsg}}</p>
         <mat-form-field>
           <input matInput type="text" name="comment" #comment placeholder="Add a comment" style="width: 300px;"/>
