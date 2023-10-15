@@ -9,9 +9,9 @@
     <button [disabled]="uploadButton" type="button" class="btn btn-primary" (click)="uploadFile(caption)">Upload</button>
     <input class="form-control" type="file" id="formFile" (change)="getFile($event)">
   </div>
-
-  <div class="mb-3 d-flex align-items-center justify-content-center">
-    <div *ngFor="let u of allPosts">
+  <div class="container">
+  <div class="mb-3 d-flex align-items-center justify-content-center divDesign" >
+    <div *ngFor="let u of allPosts" class="">
       
     <div class="card cardDesign">
       <h6 class="card-title" style="text-align: left;margin-left: 10px;">{{u.postUser}}</h6>
@@ -23,15 +23,17 @@
         <img src="{{likeUrl}}" alt="" height="25px" width="25px">
         {{countLikes}} liked it
         </button>
+        <p *ngIf="displayComment" style="text-align: left;margin-left: 10px;">{{userName}} : {{commentMsg}}</p>
         <mat-form-field>
           <input matInput type="text" name="comment" #comment placeholder="Add a comment" style="width: 300px;"/>
-          <button mat-button>Comment</button>
+          <button mat-button (click)="addComment(comment)">Comment</button>
         </mat-form-field>  
     </div>
 
     </div>
   </div>
 
+</div>
 </div>
 
 

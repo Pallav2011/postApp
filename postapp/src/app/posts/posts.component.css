@@ -18,3 +18,9 @@
     border: none;
     text-align: left;
 }
+
+.divDesign {
+display: flex;
+align-items: center;
+flex-direction: column;
+}

@@ -17,7 +17,9 @@ export class PostsComponent implements OnInit {
   likeUrl = './assets/not_like.png';
   countLikes:number = 0;
   uploadButton:boolean = true;
-  allPosts = []
+  allPosts = [];
+  commentMsg = '';
+  displayComment: boolean = false;
   constructor(private subjectServ : SubjectService, private postService:PostserviceService) { }
 
   ngOnInit() {
@@ -32,6 +34,7 @@ export class PostsComponent implements OnInit {
     this.postService.getUserData().subscribe((res)=>{
       console.log(res);
       this.allPosts.push(res);
+      this.allPosts.reverse();
       console.log(this.allPosts); 
     })
   }
@@ -76,6 +79,11 @@ export class PostsComponent implements OnInit {
       this.likeUrl = './assets/not_like.png';
       this.countLikes--;
     }
+  }
+
+  addComment(comment:any){
+    this.commentMsg = comment.value;
+    this.displayComment = true;
   }
 
 }
