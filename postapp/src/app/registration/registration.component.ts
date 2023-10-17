@@ -9,21 +9,21 @@ import { FirebaseDatabaseService } from '../services/firebase-database.service';
 })
 export class RegistrationComponent implements OnInit {
 
-  userDetails ={
-    email : '',
-    userName : '',
-    password : ''
-  }
+  arrayOfUsers = [];
+ 
   constructor(private firebaseService : FirebaseDatabaseService) { }
 
   ngOnInit() {
   }
 
   saveData(form : NgForm){
-    this.userDetails.email = form.value.email;
-    this.userDetails.userName = form.value.userName;
-    this.userDetails.password = form.value.password; 
-    this.firebaseService.postUserDetails(this.userDetails).subscribe((res)=>{
+    let userDetails ={
+      email : form.value.email,
+      userName : form.value.userName,
+      password : form.value.password
+    }
+    this.arrayOfUsers.push(userDetails)
+    this.firebaseService.postUserDetails(this.arrayOfUsers).subscribe((res)=>{
       console.log(res);
       alert('Account Created Successfully !!!');
       form.resetForm();

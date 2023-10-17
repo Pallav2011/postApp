@@ -22,30 +22,22 @@ export class LoginComponent implements OnInit {
 
   ngOnInit() {}
 
-  getData = [];
+  getData; 
 
   login(form: NgForm) {
-    console.log(form);
 
-    this.firebaseservice.getDetails().subscribe((res) => {
-      this.getData.push(res);
-      console.log(this.getData);
-
+      this.firebaseservice.getDetails().subscribe((res) => {
+      this.getData = res;  // here we get array of users from firebase
+        let email = form.value.email;
+        let pass = form.value.password;
       this.getData.forEach((currentVal) => {
-        console.log(currentVal);
-
-        if (
-          currentVal.email == form.value.email &&
-          currentVal.password == form.value.password
-        ) {
+        if (currentVal.email == email && currentVal.password == pass) {
           this.authservice.validateValue.next(true);
           this.errorMessage = false;
-          console.log("you are eligible to go posts");
           this.subjectServ.userName.next(currentVal.userName);
           this.route.navigate(["posts"]);
         } else {
           this.authservice.validateValue.next(false);
-          console.log("not eligible");
           this.errorMessage = true;
           form.resetForm();
         }

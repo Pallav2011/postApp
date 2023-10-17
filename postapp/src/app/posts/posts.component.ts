@@ -10,14 +10,12 @@ import { PostserviceService } from '../services/postservice.service';
 export class PostsComponent implements OnInit {
 
   userName = '';
-  url = '';
   file:any;
   showPost:boolean = false;
-  captionData = '';
   likeUrl = './assets/not_like.png';
   countLikes:number = 0;
   uploadButton:boolean = true;
-  allPosts = [];
+  allPosts;
   commentMsg = '';
   displayComment: boolean = false;
   constructor(private subjectServ : SubjectService, private postService:PostserviceService) { }
@@ -32,41 +30,37 @@ export class PostsComponent implements OnInit {
 
   getPostsData (){
     this.postService.getUserData().subscribe((res)=>{
-      console.log(res);
-      this.allPosts.push(res);
-      this.allPosts.reverse();
-      console.log(this.allPosts); 
+      console.log('get data from server: ',res);
+      this.allPosts = res;
+      // this.allPosts.reverse();
     })
   }
 
+  // following function is used to get the url of selected file
   getFile(event:any){
     if(event.target.files){
       var reader = new FileReader();
       reader.readAsDataURL(event.target.files[0]);
       reader.onload=(event :any)=>{
-      this.file = event.target.result;
+      this.file = event.target.result; // here we will get the final url of selected file
       }
     }
     this.uploadButton = false;
   }
 
-   postDetails = {
-    postUser : '',
-    caption : '',
-    postImageUrl : ''
-  }
-
+  arrayOfPosts = [];
   uploadFile(cap){
-   this.postDetails.postUser = this.userName;
-   this.postDetails.caption = cap.value;
-   this.postDetails.postImageUrl = this.file;
-    this.postService.postUserData(this.postDetails).subscribe((res)=>{
-      console.log(res);     
-    })
+   let postDetails = {
+      postUser :  this.userName,
+      caption : cap.value,
+      postImageUrl :  this.file
+    }
+    this.arrayOfPosts.push(postDetails);
+    this.postService.postUserData(this.arrayOfPosts).subscribe((res)=>{
+      console.log('sent to server :',res);
     this.getPostsData();
-    console.log(cap.value);   
-    this.url = this.file;
-    this.captionData = cap.value;
+    })  
+
     this.showPost = true;
   }
 
