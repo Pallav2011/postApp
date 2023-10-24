@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { SubjectService } from '../services/subject.service';
 import { PostserviceService } from '../services/postservice.service';
+import { JsonserverService } from '../services/jsonserver.service';
 
 @Component({
   selector: 'app-posts',
@@ -18,26 +19,38 @@ export class PostsComponent implements OnInit {
   allPosts;
   commentMsg = '';
   displayComment: boolean = false;
-  constructor(private subjectServ : SubjectService, private postService:PostserviceService) { }
+  constructor(private subjectServ : SubjectService, private postService:PostserviceService, private jsonservice:JsonserverService) { }
 
   ngOnInit() {
+    this.getCurrentUserName();
+    this.getPostsData();    
+  }
+
+  getCurrentUserName(){
     this.subjectServ.userName.subscribe(res=>{
       this.userName = res;
     })
-    this.getPostsData();
-    
   }
 
   getPostsData (){
-    this.postService.getUserData().subscribe((res)=>{
-      console.log('get data from server: ',res);
+    this.jsonservice.getPostData().subscribe((res)=>{
+      console.log('get posts from json',res);
       this.allPosts = res;
-      // this.allPosts.reverse();
+      this.allPosts.reverse();
     })
+
+    // following code is working for firebase database
+
+    // this.postService.getUserData().subscribe((res)=>{
+    //   console.log('get data from server: ',res);
+    //   this.allPosts = res;
+    //   this.allPosts.reverse();
+    // })
   }
 
   // following function is used to get the url of selected file
-  getFile(event:any){
+
+  getFile(event:any){  
     if(event.target.files){
       var reader = new FileReader();
       reader.readAsDataURL(event.target.files[0]);
@@ -48,23 +61,32 @@ export class PostsComponent implements OnInit {
     this.uploadButton = false;
   }
 
-  arrayOfPosts = [];
-  uploadFile(cap){
+  // arrayOfPosts = [];        this line is use when firebase server used
+ 
+  uploadFile(caption){
    let postDetails = {
       postUser :  this.userName,
-      caption : cap.value,
-      postImageUrl :  this.file
+      caption : caption.value,
+      postImageUrl : this.file
     }
-    this.arrayOfPosts.push(postDetails);
-    this.postService.postUserData(this.arrayOfPosts).subscribe((res)=>{
-      console.log('sent to server :',res);
-    this.getPostsData();
-    })  
+
+    this.jsonservice.sendPostData(postDetails).subscribe((res)=>{
+      console.log('post sent to json',res);
+      this.getPostsData();
+    })
+
+    // following code is working for firebase databse
+
+    // this.arrayOfPosts.push(postDetails);
+    // this.postService.postUserData(this.arrayOfPosts).subscribe((res)=>{
+    // console.log('sent to server :',res);
+    // this.getPostsData();
+    // })  
 
     this.showPost = true;
   }
 
-  buttonClicked(){
+  likeButtonClicked(){
     if (this.likeUrl == './assets/not_like.png') {
       this.likeUrl = './assets/like_red.png';
       this.countLikes++;

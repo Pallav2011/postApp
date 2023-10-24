@@ -1,7 +1,7 @@
 
 <div class="justify-content-center" style="text-align: center;">
   <br>
-  <h3>Welcome {{userName}}</h3>
+  <h3 style="color:rgb(37, 246, 37);">Welcome {{userName}}</h3>
 
   <textarea name="caption" id="" #caption class="captionDesign" cols="50" rows="4" placeholder="Say Something..."></textarea>
  
@@ -11,7 +11,7 @@
   </div>
   <div class="container">
   <div class="mb-3 d-flex align-items-center justify-content-center divDesign" >
-    <div *ngFor="let u of allPosts" class="">
+    <div *ngFor="let u of allPosts">
       
     <div class="card cardDesign">
       <h6 class="card-title" style="text-align: left;margin-left: 10px;">{{u.postUser}}</h6>
@@ -19,7 +19,7 @@
       <div class="card-body">
         <h5 class="card-title" style="text-align: left;">{{u.caption}}</h5>       
       </div>
-        <button (click)="buttonClicked()" class="likeButton">
+        <button (click)="likeButtonClicked()" class="likeButton">
         <img src="{{likeUrl}}" alt="" height="25px" width="25px">
         {{countLikes}} liked it
         </button>
