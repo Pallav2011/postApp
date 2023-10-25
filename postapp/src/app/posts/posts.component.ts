@@ -14,7 +14,7 @@ export class PostsComponent implements OnInit {
   file:any;
   showPost:boolean = false;
   likeUrl = './assets/not_like.png';
-  countLikes:number = 0;
+  // countLikes:number = 0;
   uploadButton:boolean = true;
   allPosts;
   commentMsg = '';
@@ -51,6 +51,7 @@ export class PostsComponent implements OnInit {
   // following function is used to get the url of selected file
 
   getFile(event:any){  
+    
     if(event.target.files){
       var reader = new FileReader();
       reader.readAsDataURL(event.target.files[0]);
@@ -67,7 +68,8 @@ export class PostsComponent implements OnInit {
    let postDetails = {
       postUser :  this.userName,
       caption : caption.value,
-      postImageUrl : this.file
+      postImageUrl : this.file,
+      likes : 0
     }
 
     this.jsonservice.sendPostData(postDetails).subscribe((res)=>{
@@ -86,16 +88,40 @@ export class PostsComponent implements OnInit {
     this.showPost = true;
   }
 
-  likeButtonClicked(){
+  likeButtonClicked(user){
+
     if (this.likeUrl == './assets/not_like.png') {
+
+      let updatedUserLikes = {
+        postUser :  user.postUser,
+        caption : user.caption,
+        postImageUrl : user.postImageUrl,
+        likes : user.likes+1
+      }
+      this.jsonservice.updatePostData(user.id,updatedUserLikes).subscribe((res)=>{
+        console.log('data updated responce',res);
+        this.getPostsData();
+      })
+
       this.likeUrl = './assets/like_red.png';
-      this.countLikes++;
-    }
-    else{
+      
+    } else{
+
+      let updatedUserLikes = {
+        postUser :  user.postUser,
+        caption : user.caption,
+        postImageUrl : user.postImageUrl,
+        likes : user.likes-1
+      }
+      this.jsonservice.updatePostData(user.id,updatedUserLikes).subscribe((res)=>{
+        console.log('data updated responce',res);
+        this.getPostsData();
+      })
+
       this.likeUrl = './assets/not_like.png';
-      this.countLikes--;
-    }
-  }
+    }     
+ }
+
 
   addComment(comment:any){
     this.commentMsg = comment.value;

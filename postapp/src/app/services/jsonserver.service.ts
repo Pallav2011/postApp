@@ -26,4 +26,8 @@ export class JsonserverService {
   getPostData(){
     return this.httpclient.get(this.postsUrl)
   }
+
+  updatePostData(id,updatedData){
+    return this.httpclient.put(this.postsUrl+'/'+id,updatedData)
+  }
 }

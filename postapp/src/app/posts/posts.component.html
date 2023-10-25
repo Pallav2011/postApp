@@ -19,9 +19,9 @@
       <div class="card-body">
         <h5 class="card-title" style="text-align: left;">{{u.caption}}</h5>       
       </div>
-        <button (click)="likeButtonClicked()" class="likeButton">
+        <button (click)="likeButtonClicked(u)" class="likeButton">
         <img src="{{likeUrl}}" alt="" height="25px" width="25px">
-        {{countLikes}} liked it
+        {{u.likes}} liked it
         </button>
         
         <p *ngIf="displayComment" style="text-align: left;margin-left: 10px;">{{userName}} : {{commentMsg}}</p>
