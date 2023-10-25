@@ -69,7 +69,8 @@ export class PostsComponent implements OnInit {
       postUser :  this.userName,
       caption : caption.value,
       postImageUrl : this.file,
-      likes : 0
+      likes : 0,
+      comments :[]
     }
 
     this.jsonservice.sendPostData(postDetails).subscribe((res)=>{
@@ -96,10 +97,11 @@ export class PostsComponent implements OnInit {
         postUser :  user.postUser,
         caption : user.caption,
         postImageUrl : user.postImageUrl,
-        likes : user.likes+1
+        likes : user.likes+1,
+        comments : user.comments
       }
       this.jsonservice.updatePostData(user.id,updatedUserLikes).subscribe((res)=>{
-        console.log('data updated responce',res);
+        // console.log('data updated responce',res); 
         this.getPostsData();
       })
 
@@ -111,10 +113,11 @@ export class PostsComponent implements OnInit {
         postUser :  user.postUser,
         caption : user.caption,
         postImageUrl : user.postImageUrl,
-        likes : user.likes-1
+        likes : user.likes-1,
+        comments : user.comments
       }
       this.jsonservice.updatePostData(user.id,updatedUserLikes).subscribe((res)=>{
-        console.log('data updated responce',res);
+        // console.log('data updated responce',res);
         this.getPostsData();
       })
 
@@ -123,9 +126,28 @@ export class PostsComponent implements OnInit {
  }
 
 
-  addComment(comment:any){
-    this.commentMsg = comment.value;
-    this.displayComment = true;
+  addComment(user,comment:any){
+    // this.commentMsg = comment.value;
+   
+    let commentObject ={
+      commentUser : this.userName,
+      commentMessage : comment.value
+    }
+    let commentArray = user.comments;
+    commentArray.push(commentObject)
+
+    let updatedUserComments = {
+      postUser :  user.postUser,
+      caption : user.caption,
+      postImageUrl : user.postImageUrl,
+      likes : user.likes,
+      comments : commentArray
+    }
+    this.jsonservice.updatePostData(user.id,updatedUserComments).subscribe((res)=>{
+      console.log('comment added responce',res); 
+      this.getPostsData();
+    })
+
   }
 
 }

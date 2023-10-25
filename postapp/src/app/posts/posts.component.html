@@ -12,7 +12,7 @@
   <div class="container">
   <div class="mb-3 d-flex align-items-center justify-content-center divDesign" >
     <div *ngFor="let u of allPosts">
-      
+
     <div class="card cardDesign">
       <h6 class="card-title" style="text-align: left;margin-left: 10px;">{{u.postUser}}</h6>
       <img class="card-img-top" src={{u.postImageUrl}} alt="Card image cap" height="400px" width="410px">
@@ -23,14 +23,19 @@
         <img src="{{likeUrl}}" alt="" height="25px" width="25px">
         {{u.likes}} liked it
         </button>
-        
-        <p *ngIf="displayComment" style="text-align: left;margin-left: 10px;">{{userName}} : {{commentMsg}}</p>
+       <span style="text-align: left;margin-left: 10px;">comments:</span>
+      <div *ngFor="let c of u.comments" class="commentBox">       
+       {{c.commentUser}} : {{c.commentMessage}}
+      </div>
+
         <mat-form-field>
           <input matInput type="text" name="comment" #comment placeholder="Add a comment" style="width: 300px;"/>
-          <button mat-button (click)="addComment(comment)">Comment</button>
+          <button mat-button (click)="addComment(u,comment)">Comment</button>
         </mat-form-field>  
     </div>
+    <hr>
 
+  
     </div>
   </div>
 
