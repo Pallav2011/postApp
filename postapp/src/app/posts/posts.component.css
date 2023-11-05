@@ -25,7 +25,13 @@ align-items: center;
 flex-direction: column;
 }
 
-.commentBox {
+.commentDesign {  
     text-align: left;
     margin-left: 10px;
+}
+
+.commentBox {
+    height: 50px;
+    overflow: hidden;
+    overflow-y: auto;
 }

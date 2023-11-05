@@ -24,9 +24,11 @@
         {{u.likes}} liked it
         </button>
        <span style="text-align: left;margin-left: 10px;">comments:</span>
-      <div *ngFor="let c of u.comments" class="commentBox">       
+       <div class="commentBox">
+      <div *ngFor="let c of u.comments.reverse()" class="commentDesign">       
        {{c.commentUser}} : {{c.commentMessage}}
       </div>
+    </div>
 
         <mat-form-field>
           <input matInput type="text" name="comment" #comment placeholder="Add a comment" style="width: 300px;"/>

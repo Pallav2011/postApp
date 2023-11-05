@@ -14,11 +14,11 @@ export class PostsComponent implements OnInit {
   file:any;
   showPost:boolean = false;
   likeUrl = './assets/not_like.png';
-  // countLikes:number = 0;
   uploadButton:boolean = true;
   allPosts;
   commentMsg = '';
   displayComment: boolean = false;
+
   constructor(private subjectServ : SubjectService, private postService:PostserviceService, private jsonservice:JsonserverService) { }
 
   ngOnInit() {
@@ -50,8 +50,7 @@ export class PostsComponent implements OnInit {
 
   // following function is used to get the url of selected file
 
-  getFile(event:any){  
-    
+  getFile(event:any){   
     if(event.target.files){
       var reader = new FileReader();
       reader.readAsDataURL(event.target.files[0]);
@@ -101,7 +100,7 @@ export class PostsComponent implements OnInit {
         comments : user.comments
       }
       this.jsonservice.updatePostData(user.id,updatedUserLikes).subscribe((res)=>{
-        // console.log('data updated responce',res); 
+        console.log('likes increament updated'); 
         this.getPostsData();
       })
 
@@ -117,7 +116,7 @@ export class PostsComponent implements OnInit {
         comments : user.comments
       }
       this.jsonservice.updatePostData(user.id,updatedUserLikes).subscribe((res)=>{
-        // console.log('data updated responce',res);
+        console.log('likes decreament updated'); 
         this.getPostsData();
       })
 
@@ -127,8 +126,7 @@ export class PostsComponent implements OnInit {
 
 
   addComment(user,comment:any){
-    // this.commentMsg = comment.value;
-   
+
     let commentObject ={
       commentUser : this.userName,
       commentMessage : comment.value
@@ -144,7 +142,7 @@ export class PostsComponent implements OnInit {
       comments : commentArray
     }
     this.jsonservice.updatePostData(user.id,updatedUserComments).subscribe((res)=>{
-      console.log('comment added responce',res); 
+      console.log('comment is added'); 
       this.getPostsData();
     })
 
