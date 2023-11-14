@@ -16,7 +16,6 @@
 .likeButton {
     background-color: transparent;
     border: none;
-    text-align: left;
 }
 
 .divDesign {
@@ -32,6 +31,6 @@ flex-direction: column;
 
 .commentBox {
     height: 50px;
-    overflow: hidden;
+    overflow:hidden;
     overflow-y: auto;
 }

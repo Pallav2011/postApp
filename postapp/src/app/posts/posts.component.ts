@@ -13,7 +13,7 @@ export class PostsComponent implements OnInit {
   userName = '';
   file:any;
   showPost:boolean = false;
-  likeUrl = './assets/not_like.png';
+  // likeUrl = './assets/not_like.png';
   uploadButton:boolean = true;
   allPosts;
   commentMsg = '';
@@ -23,7 +23,7 @@ export class PostsComponent implements OnInit {
 
   ngOnInit() {
     this.getCurrentUserName();
-    this.getPostsData();    
+    this.getPostsData();
   }
 
   getCurrentUserName(){
@@ -51,6 +51,7 @@ export class PostsComponent implements OnInit {
   // following function is used to get the url of selected file
 
   getFile(event:any){   
+
     if(event.target.files){
       var reader = new FileReader();
       reader.readAsDataURL(event.target.files[0]);
@@ -68,7 +69,11 @@ export class PostsComponent implements OnInit {
       postUser :  this.userName,
       caption : caption.value,
       postImageUrl : this.file,
-      likes : 0,
+      likes : {
+        likeUrl : './assets/not_like.png',
+        likeCounts : 0,
+        likedUsersArray : []
+      },
       comments :[]
     }
 
@@ -89,39 +94,50 @@ export class PostsComponent implements OnInit {
   }
 
   likeButtonClicked(user){
-
-    if (this.likeUrl == './assets/not_like.png') {
-
-      let updatedUserLikes = {
-        postUser :  user.postUser,
-        caption : user.caption,
-        postImageUrl : user.postImageUrl,
-        likes : user.likes+1,
-        comments : user.comments
-      }
-      this.jsonservice.updatePostData(user.id,updatedUserLikes).subscribe((res)=>{
-        console.log('likes increament updated'); 
-        this.getPostsData();
-      })
-
-      this.likeUrl = './assets/like_red.png';
+    
+    let arr = user.likes.likedUsersArray;
+    
+    if (user.likes.likedUsersArray.includes(this.userName)) {
+      let indexOfUserName = user.likes.likedUsersArray.indexOf(this.userName);
+      arr.splice(indexOfUserName,1);
       
-    } else{
-
+      if (user.likes.likeCounts != 0) {             
       let updatedUserLikes = {
         postUser :  user.postUser,
         caption : user.caption,
         postImageUrl : user.postImageUrl,
-        likes : user.likes-1,
+        likes : {
+          likeUrl:'./assets/not_like.png',
+          likeCounts:user.likes.likeCounts-1,
+          likedUsersArray : arr
+        },
         comments : user.comments
       }
       this.jsonservice.updatePostData(user.id,updatedUserLikes).subscribe((res)=>{
         console.log('likes decreament updated'); 
         this.getPostsData();
       })
+    } 
+      
+    } else{
+      arr.push(this.userName);
 
-      this.likeUrl = './assets/not_like.png';
-    }     
+      let updatedUserLikes = {
+        postUser :  user.postUser,
+        caption : user.caption,
+        postImageUrl : user.postImageUrl,
+        likes : {
+          likeUrl:'./assets/like_red.png',
+          likeCounts:user.likes.likeCounts+1,
+          likedUsersArray : arr
+        },
+        comments : user.comments
+      }
+      this.jsonservice.updatePostData(user.id,updatedUserLikes).subscribe((res)=>{
+        console.log('likes increament updated'); 
+        this.getPostsData();
+      })
+  }  
  }
 
 

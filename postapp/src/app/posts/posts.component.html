@@ -2,13 +2,14 @@
 <div class="justify-content-center" style="text-align: center;">
   <br>
   <h3 style="color:rgb(37, 246, 37);">Welcome {{userName}}</h3>
-
+  
   <textarea name="caption" id="" #caption class="captionDesign" cols="50" rows="4" placeholder="Say Something..."></textarea>
  
   <div class="mb-3 d-flex align-items-center justify-content-center" >
     <button [disabled]="uploadButton" type="button" class="btn btn-primary" (click)="uploadFile(caption)">Upload</button>
     <input class="form-control" type="file" id="formFile" (change)="getFile($event)">
   </div>
+
   <div class="container">
   <div class="mb-3 d-flex align-items-center justify-content-center divDesign" >
     <div *ngFor="let u of allPosts">
@@ -19,11 +20,18 @@
       <div class="card-body">
         <h5 class="card-title" style="text-align: left;">{{u.caption}}</h5>       
       </div>
+
+      <div style="text-align: left;">
         <button (click)="likeButtonClicked(u)" class="likeButton">
-        <img src="{{likeUrl}}" alt="" height="25px" width="25px">
-        {{u.likes}} liked it
-        </button>
-       <span style="text-align: left;margin-left: 10px;">comments:</span>
+        <img src="{{u.likes.likeUrl}}" alt="" height="25px" width="25px">
+       </button>
+       <span>{{u.likes.likeCounts}} liked it</span>
+       <button class="likeButton">
+        <img src="./assets/commentLogo.png" alt="" height="25px" width="25px">
+       </button>  
+       <span style="text-align: left;">comments ({{u.comments.length}})</span>
+      </div>
+
        <div class="commentBox">
       <div *ngFor="let c of u.comments.reverse()" class="commentDesign">       
        {{c.commentUser}} : {{c.commentMessage}}
@@ -36,7 +44,6 @@
         </mat-form-field>  
     </div>
     <hr>
-
   
     </div>
   </div>

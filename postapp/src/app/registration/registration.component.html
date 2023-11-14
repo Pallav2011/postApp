@@ -20,10 +20,10 @@
 
         <mat-form-field appearance="outline">
             <mat-label>Enter Password</mat-label>
-            <input matInput ngModel required #password="ngModel" name="password" [type]="hide ? 'password' : 'text'"
+            <input matInput ngModel required #password="ngModel" name="password" [type]="hide ? 'text' : 'password'"
               placeholder="Password" minlength="8" maxlength="20" />
             <button mat-icon-button matSuffix (click)="hide = !hide" [attr.aria-label]="'Hide password'" [attr.aria-pressed]="hide">
-              <mat-icon>{{hide ? 'visibility_off' : 'visibility'}}</mat-icon>
+              <mat-icon>{{hide ? 'visibility' : 'visibility_off'}}</mat-icon>
             </button>
             <mat-error *ngIf="password.errors?.required">The password is mandatory</mat-error>
             <mat-error *ngIf="password.errors?.minlength">
