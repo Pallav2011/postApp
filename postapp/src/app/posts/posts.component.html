@@ -1,7 +1,7 @@
 
 <div class="justify-content-center" style="text-align: center;">
-  <br>
-  <h3 style="color:rgb(37, 246, 37);">Welcome {{userName}}</h3>
+ 
+  <h3 class="welcomeDesign">Welcome {{userName}}</h3>
   
   <textarea name="caption" id="" #caption class="captionDesign" cols="50" rows="4" placeholder="Say Something..."></textarea>
  
@@ -23,7 +23,12 @@
 
       <div style="text-align: left;">
         <button (click)="likeButtonClicked(u)" class="likeButton">
-        <img src="{{u.likes.likeUrl}}" alt="" height="25px" width="25px">
+          <div *ngIf="u.likes.likedUsersArray.includes(userName); else notLikeTemplate">
+            <img src="{{isLike}}" alt="" height="25px" width="25px">
+          </div>
+            <ng-template #notLikeTemplate>
+            <img src="{{isNotLike}}" alt="" height="25px" width="25px">
+            </ng-template>
        </button>
        <span>{{u.likes.likeCounts}} liked it</span>
        <button class="likeButton">

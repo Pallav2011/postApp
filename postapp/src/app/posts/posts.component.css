@@ -34,3 +34,8 @@ flex-direction: column;
     overflow:hidden;
     overflow-y: auto;
 }
+
+.welcomeDesign {
+    color:rgb(37, 246, 37);
+    margin-top: 30px;
+}

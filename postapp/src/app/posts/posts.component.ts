@@ -13,7 +13,8 @@ export class PostsComponent implements OnInit {
   userName = '';
   file:any;
   showPost:boolean = false;
-  // likeUrl = './assets/not_like.png';
+  isLike = './assets/like_red.png';
+  isNotLike = './assets/not_like.png';
   uploadButton:boolean = true;
   allPosts;
   commentMsg = '';
@@ -70,7 +71,6 @@ export class PostsComponent implements OnInit {
       caption : caption.value,
       postImageUrl : this.file,
       likes : {
-        likeUrl : './assets/not_like.png',
         likeCounts : 0,
         likedUsersArray : []
       },
@@ -107,7 +107,6 @@ export class PostsComponent implements OnInit {
         caption : user.caption,
         postImageUrl : user.postImageUrl,
         likes : {
-          likeUrl:'./assets/not_like.png',
           likeCounts:user.likes.likeCounts-1,
           likedUsersArray : arr
         },
@@ -127,7 +126,6 @@ export class PostsComponent implements OnInit {
         caption : user.caption,
         postImageUrl : user.postImageUrl,
         likes : {
-          likeUrl:'./assets/like_red.png',
           likeCounts:user.likes.likeCounts+1,
           likedUsersArray : arr
         },
@@ -161,7 +159,5 @@ export class PostsComponent implements OnInit {
       console.log('comment is added'); 
       this.getPostsData();
     })
-
   }
-
 }
