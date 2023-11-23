@@ -1,10 +1,9 @@
 
-<div style="text-align: center;" class="justify--content-center">
-<mat-card class="register-page">
-    <mat-card-title style="color:rgb(37, 246, 37);"> Create Account</mat-card-title>
+<section>
+<mat-card class="formBox">
     <mat-card-content>
       <form class="register-form" #registerForm="ngForm">
-
+        <h2>Create Account</h2>
         <mat-form-field appearance="outline">
             <mat-label>Enter Email</mat-label>
             <input matInput placeholder="Email" type="email" email ngModel #email="ngModel" name="email" required>
@@ -37,10 +36,10 @@
           <br>
           <span style="font-weight:bold; text-align: center;">
             OR <br> 
-            <a routerLinkActive="active" routerLink="/login">Login</a>
+           <h4><b> <a routerLinkActive="active" routerLink="/login">Login</a> </b></h4>
           </span>
 
       </form>
     </mat-card-content>
   </mat-card>
-</div>
+</section>
