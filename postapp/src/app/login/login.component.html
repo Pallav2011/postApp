@@ -1,8 +1,11 @@
-<mat-card class="login-page">
-  <mat-card-title style="text-align: center;color:rgb(37, 246, 37);"> Login </mat-card-title>
+<section>
+
+  <div class="formBox">
+
   <mat-card-content>
     <form class="login-form" #loginForm="ngForm">
 
+      <h2>Login</h2>
       <mat-form-field>
         <input matInput type="email" name="email" ngModel #email="ngModel" required email placeholder=" Enter Email" />
         <mat-error *ngIf="email.errors?.required">The email is mandatory</mat-error>
@@ -28,6 +31,7 @@
 
     </form>
 
-    <div class="form-val"></div>
   </mat-card-content>
-</mat-card>
+
+</div>
+</section>
