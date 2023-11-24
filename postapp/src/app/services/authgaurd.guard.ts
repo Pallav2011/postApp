@@ -9,8 +9,15 @@ import { AuthService } from './auth.service';
 export class AuthgaurdGuard implements CanActivate {
   
   constructor(private authservice : AuthService){ }
+  
   canActivate(){
-    if(this.authservice.isUserLoggedIn()){
+    let result;
+    
+    this.authservice.validateValue.subscribe(res=>{
+      result = res;
+    })
+    
+    if(result){
       return true
     } else {
       return false

@@ -4,7 +4,7 @@
  
   <h3 class="welcomeDesign">Welcome {{userName}}</h3>
   
-  <textarea name="caption" id="" #caption class="captionDesign" cols="50" rows="3" placeholder="Say Something..."></textarea>
+  <textarea name="caption" id="" #caption cols="50" rows="3" placeholder="Say Something..."></textarea>
  
   <div class="mb-3 d-flex align-items-center justify-content-center" >
     <button [disabled]="uploadButton" type="button" class="btn btn-primary" (click)="uploadFile(caption)">Upload</button>

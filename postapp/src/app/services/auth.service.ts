@@ -8,15 +8,5 @@ export class AuthService {
 
   constructor() { }
   validateValue =new BehaviorSubject<boolean>(false);
- 
-  isUserLoggedIn(){
-    if(this.validateValue){
-      return true
-    } else {
-      return false
-    }
-    
-  }
-
 
 }

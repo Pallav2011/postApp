@@ -37,6 +37,7 @@ export class LoginComponent implements OnInit {
         if (currentVal.email == email && currentVal.password == pass) {
           this.errorMessage = false;
           this.subjectServ.userName.next(currentVal.userName);
+          this.authservice.validateValue.next(true);
           this.route.navigate(["posts"]);
         }else {
           this.errorMessage = true;
