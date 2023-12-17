@@ -1,4 +1,3 @@
-
 .form-control {
     width: 350px;
 }
@@ -6,7 +5,7 @@
 .cardDesign {
     width: 420px;
     /* height: 500px; */
-    background-color:aqua;
+    background-color: aqua;
     border: solid 1px black;
 }
 
@@ -16,29 +15,29 @@
 }
 
 .divDesign {
-display: flex;
-align-items: center;
-flex-direction: column;
+    display: flex;
+    align-items: center;
+    flex-direction: column;
 }
 
-.commentDesign {  
+.commentDesign {
     text-align: left;
     margin-left: 10px;
 }
 
 .commentBox {
     height: 50px;
-    overflow:hidden;
+    overflow: hidden;
     overflow-y: auto;
 }
 
 .welcomeDesign {
-    color:purple;
+    color: purple;
     /* margin-top: 30px; */
 }
 
 section {
-    background:lavender
+    background: lavender
 }
 
 textarea {

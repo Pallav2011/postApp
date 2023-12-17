@@ -1,36 +1,39 @@
 <section>
 
   <mat-card class="formBox">
-  <mat-card-content>
-    <form class="login-form" #loginForm="ngForm">
+    <mat-card-content>
+      <form class="login-form" #loginForm="ngForm">
 
-      <h2>Login</h2>
-      <mat-form-field>
-        <input matInput type="email" name="email" ngModel #email="ngModel" required email placeholder=" Enter Email" />
-        <mat-error *ngIf="email.errors?.required">The email is mandatory</mat-error>
-      </mat-form-field>
+        <h2>Login</h2>
+        <!-- <img class="logoDesign" src="./assets/login.png" alt=""> -->
+        <mat-form-field>
+          <input matInput type="email" name="email" ngModel #email="ngModel" required email
+            placeholder=" Enter Email" />
+          <mat-error *ngIf="email.errors?.required">The email is mandatory</mat-error>
+        </mat-form-field>
 
-      <mat-form-field>
-        <input matInput ngModel required #password="ngModel" name="password" [type]="hide ? 'text' : 'password'"
-          placeholder="Password" />
-        <button mat-icon-button matSuffix (click)="hide = !hide" [attr.aria-label]="'Hide password'"
-          [attr.aria-pressed]="hide">
-          <mat-icon>{{hide ? 'visibility' :'visibility_off' }}</mat-icon>
-        </button>
-        <mat-error *ngIf="password.errors?.required">The password is mandatory</mat-error>
-      </mat-form-field> <br>
+        <mat-form-field>
+          <input matInput ngModel required #password="ngModel" name="password" [type]="hide ? 'text' : 'password'"
+            placeholder="Password" />
+          <button mat-icon-button matSuffix (click)="hide = !hide" [attr.aria-label]="'Hide password'"
+            [attr.aria-pressed]="hide">
+            <mat-icon>{{hide ? 'visibility' :'visibility_off' }}</mat-icon>
+          </button>
+          <mat-error *ngIf="password.errors?.required">The password is mandatory</mat-error>
+        </mat-form-field> <br>
 
-      <mat-error *ngIf="errorMessage">Wrong email and password</mat-error>
-      <button mat-raised-button color="primary" [disabled]="!loginForm.valid" (click)="login(loginForm)">Login</button>
-      <br>
-      <span style="font-weight:bold; text-align: center;">
-        OR <br>
-        <a routerLinkActive="active" routerLink="/registration">Create Account</a>
-      </span>
+        <mat-error *ngIf="errorMessage">Wrong email and password</mat-error>
+        <button mat-raised-button color="primary" [disabled]="!loginForm.valid"
+          (click)="login(loginForm)">Login</button>
+        <br>
+        <span style="font-weight:bold; text-align: center;">
+          OR <br>
+          <a routerLinkActive="active" routerLink="/registration">Create Account</a>
+        </span>
 
-    </form>
+      </form>
 
-  </mat-card-content>
-</mat-card>
+    </mat-card-content>
+  </mat-card>
 
 </section>
